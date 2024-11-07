@@ -71,6 +71,7 @@ class MultinomialHMM(BaseHMM):
         state_no_train_de=None,
         learning_rate=0.1,
         verbose=True,
+        random_state=None,
     ):
         """Constructor method
 
@@ -91,6 +92,7 @@ class MultinomialHMM(BaseHMM):
             A_prior=A_prior,
             verbose=verbose,
             learning_rate=learning_rate,
+            random_state=random_state,
         )
         self.n_emissions = n_emissions
         self.n_features = n_features
@@ -157,7 +159,7 @@ class MultinomialHMM(BaseHMM):
             else:
                 if self.nr_no_train_de == 0:
                     self.B = [
-                        np.random.rand(self.n_states, self.n_features[i])
+                        self.rng.rand(self.n_states, self.n_features[i])
                         for i in range(self.n_emissions)
                     ]
                     for i in range(self.n_emissions):
@@ -301,5 +303,5 @@ class MultinomialHMM(BaseHMM):
         res = []
         for e in range(self.n_emissions):
             cdf = np.cumsum(self.B[e][state, :])
-            res.append((cdf > np.random.rand()).argmax())
+            res.append((cdf > self.rng.rand()).argmax())
         return np.asarray(res)

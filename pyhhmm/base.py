@@ -71,6 +71,7 @@ class BaseHMM(object):
     :param verbose: flag to be set to True if per-iteration convergence reports should 
         be printed. Defaults to True.
     :type verbose: bool, optional 
+    :param random_state: seed for the random number generator
     """
 
     def __init__(

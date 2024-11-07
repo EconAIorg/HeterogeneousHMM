@@ -99,6 +99,7 @@ class BaseHMM(object):
         self.A_prior = A_prior
         self.learning_rate = learning_rate
         self.verbose = verbose
+        self.random_state = random_state
         self.rng = np.random.default_rng(random_state)
 
     def __str__(self):

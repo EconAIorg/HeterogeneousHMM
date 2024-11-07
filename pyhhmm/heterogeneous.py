@@ -206,7 +206,7 @@ class HeterogeneousHMM(BaseHMM):
             X, gidx=self.n_g_emissions)
 
         if 'm' in self.init_params:
-            kmeans = cluster.KMeans(n_clusters=self.n_states, random_state=0)
+            kmeans = cluster.KMeans(n_clusters=self.n_states, random_state=self.random_state)
             kmeans.fit(X_concat)
             self.means = kmeans.cluster_centers_
         if 'c' in self.init_params:

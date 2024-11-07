@@ -84,6 +84,7 @@ class GaussianHMM(BaseHMM):
         min_covar=1e-3,
         learning_rate=0.,
         verbose=False,
+        random_state=None,
     ):
         if covariance_type not in COVARIANCE_TYPES:
             raise ValueError(
@@ -99,6 +100,7 @@ class GaussianHMM(BaseHMM):
             A_prior=A_prior,
             learning_rate=learning_rate,
             verbose=verbose,
+            random_state=random_state,
         )
 
         self.n_emissions = n_emissions
@@ -481,4 +483,4 @@ class GaussianHMM(BaseHMM):
             from the emission distribution corresponding to a given state
         :rtype: array_like
         """
-        return np.random.multivariate_normal(self.means[state], self.covars[state])
+        return self.rng.multivariate_normal(self.means[state], self.covars[state])
